@@ -62,6 +62,7 @@ function ListContacts(props){
     return(
       <View style={Styles.oneContact}>
         <TouchableOpacity style={{flexDirection: 'row'}}>
+        <View style={Styles.thumbnails}></View>
           <View style={Styles.info}>
             <Text>{props.contact.item.displayName}</Text>
             <Text>{number ? number.number : 'no number found'}</Text>
@@ -93,17 +94,16 @@ const Styles = StyleSheet.create({
     borderBottomWidth: 0.5,
   },
   thumbnails: {
-    width: 30,
-    height: 30,
+    width: 60,
+    height: 60,
     borderRadius: 30,
     backgroundColor: 'gray',
-    margin: 4,
+    margin: 0,
     marginRight: 7,
   },
   info: {
-    width: '80%',
+    width: '60%',
     justifyContent: 'center',
-    paddingLeft: 10,
   },
   downloadButton: {
     position: 'absolute',
