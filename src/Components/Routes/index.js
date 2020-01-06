@@ -5,10 +5,13 @@ import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import Login from '../Login';
 import Home from '../Home';
 import CreateAccount from '../CreateAccount';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class Routes {
   tabNavigator = createMaterialTopTabNavigator({
-    Home: Home,
+    Home: {
+      screen: Home,
+    },
     Upload: {
       screen: Home,
     },
@@ -21,7 +24,15 @@ class Routes {
     Settings: {
       screen: Home,
     },
-  });
+    
+  },
+  {
+    tabBarOptions: {
+      showIcon: true,
+      showLabel: false,
+    }
+  }
+);
 
   switchNavigator = createSwitchNavigator({
     Login: {
