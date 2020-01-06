@@ -38,6 +38,7 @@ class Download extends Component {
         <Text>List of contacts</Text>
          </View>
          <CheckBox title="Select All"/>
+         <Icon style={Styles.icons} name="md-download" size={30} />
       </View>
         <FlatList
           keyExtractor={item => item.recordID}
@@ -67,8 +68,10 @@ function ListContacts(props){
             <Text>{props.contact.item.displayName}</Text>
             <Text>{number ? number.number : 'no number found'}</Text>
           </View>
+          <View style={Styles.buttons}>
           <CheckBox/>
           <Icon style={Styles.icons} name="md-download" size={30} />
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -118,5 +121,11 @@ const Styles = StyleSheet.create({
   },
   icons:{
     paddingLeft: 10,
+  },
+  buttons:
+  {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
