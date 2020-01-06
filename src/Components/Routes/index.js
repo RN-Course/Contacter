@@ -1,8 +1,8 @@
 // import React from 'react';
-import {createSwitchNavigator, createAppContainer} from 'react-navigation';
-import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import Login from '../Login';
 import Home from '../Home';
 import CreateAccount from '../CreateAccount';
@@ -42,10 +42,10 @@ class Routes {
   );
   drawerNavigator = createDrawerNavigator(
     {
-      Home: {screen: this.tabNavigator},
-      Download: {screen: this.tabNavigator},
-      Share: {screen: this.tabNavigator},
-      Upload: {screen: this.tabNavigator},
+      Home: { screen: this.tabNavigator },
+      Download: { screen: this.tabNavigator },
+      Share: { screen: this.tabNavigator },
+      Upload: { screen: this.tabNavigator },
     },
 
     {

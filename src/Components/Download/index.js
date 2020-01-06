@@ -37,7 +37,7 @@ class Download extends Component {
       <View style={{width: '77%'}}>
         <Text>List of contacts</Text>
          </View>
-         <CheckBox title='Select All'/>
+         <CheckBox title="Select All"/>
       </View>
         <FlatList
           keyExtractor={item => item.recordID}
