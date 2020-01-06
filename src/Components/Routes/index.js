@@ -1,45 +1,66 @@
 // import React from 'react';
 import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
-// import {createDrawerNavigator} from 'react-navigation-drawer';
+
+import {createDrawerNavigator} from 'react-navigation-drawer';
 import Login from '../Login';
 import Home from '../Home';
 import CreateAccount from '../CreateAccount';
-import Icon from 'react-native-vector-icons/Ionicons';
-
+import CustomTabBar from '../CustomTabBarComponent';
+import Profile from '../Profile';
+import Download from '../Download';
+import Share from '../Share';
+import Upload from '../Upload';
+import Sync from '../Sync';
 class Routes {
-  tabNavigator = createMaterialTopTabNavigator({
-    Home: {
-      screen: Home,
+  tabNavigator = createMaterialTopTabNavigator(
+    {
+      Home: {
+        screen: Home,
+      },
+      Download: {
+        screen: Download,
+      },
+      Share: {
+        screen: Share,
+      },
+      Upload: {
+        screen: Upload,
+      },
     },
-    Upload: {
-      screen: Home,
+    {
+      tabBarOptions: {
+        showIcon: true,
+        showLabel: false,
+        style: {
+          backgroundColor: 'whitesmoke',
+          elevation: 0,
+        },
+      },
+      tabBarComponent: CustomTabBar,
     },
-    Sync: {
-      screen: Home,
+  );
+  drawerNavigator = createDrawerNavigator(
+    {
+      Home: {screen: this.tabNavigator},
+      Download: {screen: this.tabNavigator},
+      Share: {screen: this.tabNavigator},
+      Upload: {screen: this.tabNavigator},
     },
-    Download: {
-      screen: Home,
+
+    {
+      contentComponent: Profile,
+      drawerWidth: '100%',
+      // drawerPosition: ''
     },
-    Settings: {
-      screen: Home,
-    },
-    
-  },
-  {
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: false,
-    }
-  }
-);
+  );
 
   switchNavigator = createSwitchNavigator({
     Login: {
       screen: Login,
     },
     Home: {
-      screen: this.tabNavigator,
+      screen: this.drawerNavigator,
     },
     CreateAccount: {
       screen: CreateAccount,
