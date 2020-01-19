@@ -5,23 +5,45 @@ import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import Login from '../Login';
 import Home from '../Home';
 import CreateAccount from '../CreateAccount';
-
+import CustomTabBar from '../CustomTabBarComponent';
+// import Profile from '../Profile';
+import Download from '../Download';
+import Share from '../Share';
+import Upload from '../Upload';
+import Sync from '../Sync';
 class Routes {
-  tabNavigator = createMaterialTopTabNavigator({
-    Home: Home,
-    Upload: {
-      screen: Home,
+  tabNavigator = createMaterialTopTabNavigator(
+    {
+      Home: {
+        screen: Home,
+      },
+      Download: {
+        screen: Download,
+      },
+      Share: {
+        screen: Share,
+      },
+      Upload: {
+        screen: Upload,
+      },
+      Sync: {
+        screen: Sync,
+      },
     },
-    Sync: {
-      screen: Home,
+    {
+      tabBarOptions: {
+        showIcon: true,
+        showLabel: false,
+        style: {
+          backgroundColor: 'whitesmoke',
+          // borderColor: 'transparent',
+          // borderWidth: 0,
+          elevation: 0,
+        },
+      },
+      tabBarComponent: CustomTabBar,
     },
-    Download: {
-      screen: Home,
-    },
-    Settings: {
-      screen: Home,
-    },
-  });
+  );
 
   switchNavigator = createSwitchNavigator({
     Login: {

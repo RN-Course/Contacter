@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Text} from 'react-native';
-class Profile extends Component {
+class EditContact extends Component {
   state = {};
   render() {
-    return <Text>Profile Page</Text>;
+    return <Text>EditContact Page</Text>;
   }
 }
 
-export default Profile;
+export default EditContact;
