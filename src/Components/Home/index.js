@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Contacts from 'react-native-contacts';
-// import {Item} from 'native-base';
 
 class Home extends Component {
   state = {
@@ -45,6 +44,9 @@ class Home extends Component {
           data={this.state.contacts}
           renderItem={item => <ListContacts contact={item} />}
         />
+        <TouchableOpacity style={Styles.syncButton}>
+          <Icon color="gray" name="md-sync" size={35} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -99,5 +101,16 @@ const Styles = StyleSheet.create({
   info: {
     width: '80%',
     justifyContent: 'center',
+  },
+  syncButton: {
+    position: 'absolute',
+    bottom: 50,
+    right: 30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    elevation: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -11,15 +11,28 @@ import {MaterialTopTabBar} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 class CustomTabBar extends Component {
   state = {};
+  switchDrawer = () => {
+    this.props.navigation.openDrawer();
+  };
   render() {
     return (
       <View style={Styles.wrapper}>
         <View style={Styles.header}>
           <Left style={{flexDirection: 'row'}}>
-            <Icon name="md-menu" size={30} style={{marginRight: 15}} />
+            <Icon
+              onPress={this.switchDrawer}
+              name="md-menu"
+              size={30}
+              style={{marginRight: 15}}
+            />
             <H2>Contacter</H2>
           </Left>
-          <Right>
+          <Right
+            style={{
+              flexDirection: 'row',
+              maxWidth: 70,
+            }}>
+            <Icon name="md-sync" size={30} style={{marginRight: 25}} />
             <Icon name="ios-search" size={30} />
             {/* <TextInput
               placeholder="Search..."

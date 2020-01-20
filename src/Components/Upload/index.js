@@ -7,7 +7,7 @@ class Upload extends Component {
     return <Text>Upload Page</Text>;
   }
   static navigationOptions = () => ({
-    tabBarIcon: <Icon name="md-upload" size={30} />,
+    tabBarIcon: <Icon name="md-cloud-upload" size={30} />,
   });
 }
 

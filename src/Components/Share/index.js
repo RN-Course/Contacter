@@ -7,7 +7,7 @@ class Share extends Component {
     return <Text>Share Page</Text>;
   }
   static navigationOptions = () => ({
-    tabBarIcon: <Icon name="md-home" size={30} />,
+    tabBarIcon: <Icon name="md-share" size={30} />,
   });
 }
 
