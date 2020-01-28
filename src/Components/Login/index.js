@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   View,
   Text,
+  Image,
+  StatusBar,
 } from 'react-native';
-import {H1} from 'native-base';
-import {Icon} from 'native-base';
-
+import {AuthStyles as Styles} from '../../assets/Styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 class Login extends Component {
   handleLogin = () => {
     this.props.navigation.navigate('Home');
@@ -17,33 +17,44 @@ class Login extends Component {
   render() {
     return (
       <View style={Styles.wrapper}>
-        <View style={Styles.header}>
-          <Icon name="ios-contact" style={{fontSize: 80, color: 'white'}} />
+        <StatusBar backgroundColor="#0f304d" />
+        <View style={{...Styles.header}}>
+          <Image
+            source={require('../../assets/Images/logo.png')}
+            style={{height: 180, width: 180}}
+          />
         </View>
         <View style={Styles.form}>
-          <H1
-            style={{
-              alignSelf: 'center',
-              marginBottom: 25,
-              ...Styles.whiteText,
-            }}>
-            Login Page
-          </H1>
-          <Text style={{...Styles.whiteText}}>#User Name</Text>
-          <TextInput
-            style={({...Styles.whiteText}, Styles.inputs)}
-            placeholder="User name..."
-          />
-          <Text style={{...Styles.whiteText}}>#Password</Text>
-          <TextInput
-            style={({...Styles.whiteText}, Styles.inputs)}
-            secureTextEntry={true}
-            placeholder="password..."
-          />
+          <View style={Styles.inputHolder}>
+            <Text style={{...Styles.whiteText}}>User Name</Text>
+            <TextInput
+              style={Styles.inputs}
+              placeholderTextColor="white"
+              placeholder="example@domain.com"
+            />
+          </View>
+          <View style={Styles.inputHolder}>
+            <Text style={{...Styles.whiteText}}>Password</Text>
+            <TextInput
+              style={Styles.inputs}
+              secureTextEntry={true}
+              placeholder="*********"
+              placeholderTextColor="white"
+            />
+          </View>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Home')}
-            style={Styles.loginButton}>
-            <Text>Login</Text>
+            style={{...Styles.loginButton}}
+            onPress={() => this.props.navigation.navigate('Home')}>
+            <View style={{flex: 1}}>
+              <Text style={{fontSize: 20}}>Login</Text>
+            </View>
+            <View>
+              <Icon
+                name="md-arrow-down"
+                size={25}
+                style={{transform: [{rotate: '270deg'}]}}
+              />
+            </View>
           </TouchableOpacity>
         </View>
         <View style={Styles.tools}>
@@ -65,50 +76,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-export const Styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: '#555',
-    flex: 1,
-    // alignItems: 'center'
-  },
-  header: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 100,
-  },
-  form: {
-    padding: 15,
-    // backgroundColor: 'green',
-    flex: 1,
-  },
-  inputs: {
-    borderWidth: 1,
-    borderColor: '#9a99a9',
-    padding: 10,
-    paddingTop: 6,
-    paddingBottom: 6,
-    marginBottom: 10,
-  },
-  loginButton: {
-    marginTop: 20,
-    backgroundColor: 'skyblue',
-    padding: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tools: {
-    flex: 0.2,
-    flexDirection: 'row',
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttons: {
-    padding: 20,
-  },
-  whiteText: {
-    color: 'white',
-  },
-});

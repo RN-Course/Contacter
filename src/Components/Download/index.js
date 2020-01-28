@@ -1,27 +1,17 @@
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  PermissionsAndroid,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  CheckBox,
-} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList, CheckBox} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Contacts from 'react-native-contacts';
-
+import {DownloadStyles as Styles} from '../../assets/Styles';
 
 class Download extends Component {
-  
   state = {
     contacts: [],
-  }
+  };
 
   componentDidMount = () => {
     this._ReadContacts();
   };
-  
 
   _ReadContacts = () => {
     Contacts.getAll((err, contacts) => {
@@ -29,17 +19,17 @@ class Download extends Component {
       this.setState({contacts});
     });
   };
-  
+
   render() {
     return (
       <View style={Styles.wrapper}>
-      <View style={{flexDirection: 'row'}}>
-      <View style={{width: '77%'}}>
-        <Text>List of contacts</Text>
-         </View>
-         <CheckBox title="Select All"/>
-         <Icon style={Styles.icons} name="md-download" size={30} />
-      </View>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{width: '77%'}}>
+            <Text>List of contacts</Text>
+          </View>
+          <CheckBox title="Select All" />
+          <Icon style={Styles.icons} name="md-download" size={30} />
+        </View>
         <FlatList
           keyExtractor={item => item.recordID}
           data={this.state.contacts}
@@ -57,75 +47,27 @@ class Download extends Component {
   });
 }
 
-function ListContacts(props){
-  if(props){
+function ListContacts(props) {
+  if (props) {
     const [number] = props.contact.item.phoneNumbers;
-    return(
+    return (
       <View style={Styles.oneContact}>
         <TouchableOpacity style={{flexDirection: 'row'}}>
-        <View style={Styles.thumbnails}></View>
+          <View style={Styles.thumbnails}></View>
           <View style={Styles.info}>
             <Text>{props.contact.item.displayName}</Text>
             <Text>{number ? number.number : 'no number found'}</Text>
           </View>
           <View style={Styles.buttons}>
-          <CheckBox/>
-          <Icon style={Styles.icons} name="md-download" size={30} />
+            <CheckBox />
+            <Icon style={Styles.icons} name="md-download" size={30} />
           </View>
         </TouchableOpacity>
       </View>
-    )
-  }
-  else {
+    );
+  } else {
     return null;
   }
-  
 }
 
 export default Download;
-
-const Styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  oneContact: {
-    minHeight: 60,
-    marginLeft: 3,
-    marginRight: 3,
-    padding: 15,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 0.5,
-  },
-  thumbnails: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: 'gray',
-    margin: 0,
-    marginRight: 7,
-  },
-  info: {
-    width: '60%',
-    justifyContent: 'center',
-  },
-  downloadButton: {
-    position: 'absolute',
-    bottom: 50,
-    right: 30,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    elevation: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icons:{
-    paddingLeft: 10,
-  },
-  buttons:
-  {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})

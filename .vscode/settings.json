@@ -1,3 +1,7 @@
 {
-        "editor.fontFamily": "'Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'"
+        "editor.fontFamily": "'Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+        "prettier.arrowParens": "always",
+        "prettier.jsxBracketSameLine": true,
+        "prettier.jsxSingleQuote": true,
+        "prettier.insertPragma": true
 }

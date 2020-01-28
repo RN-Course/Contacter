@@ -1,114 +1,87 @@
 import React, {Component} from 'react';
 import {
-  TextInput,
   TouchableOpacity,
-  StyleSheet,
   View,
   Text,
+  StatusBar,
+  ScrollView,
 } from 'react-native';
-import {H1, H2} from 'native-base';
+import {AuthStyles as Styles} from '../../assets/Styles';
+import {H2} from 'native-base';
+import {Input, Submit} from '../Global/forms';
+import {SuccessMessage} from '../Global/messages';
 
 class CreateAccount extends Component {
-  // state = {  }
+  state = {
+    signedUp: false,
+  };
 
-  handleLogin = () => {
-    this.props.navigation.navigate('Home');
+  handleSignup = () => {
+    console.log(this.state);
+    console.log('hello');
+    this.setState({signedUp: true});
+    setTimeout(() => {
+      this.props.navigation.navigate('Login');
+    }, 4000);
   };
 
   render() {
     return (
-      <View style={Styles.wrapper}>
-        <View style={Styles.form}>
-          <H1 style={{marginBottom: 25}}>Signup Page</H1>
-          <Text>#User Name</Text>
-          <TextInput style={Styles.inputs} placeholder="User name..." />
-          <Text>#Phone Number</Text>
-          <TextInput style={Styles.inputs} placeholder="User name..." />
-          <Text>#Email</Text>
-          <TextInput style={Styles.inputs} placeholder="User name..." />
-          {/* <Text>#Password</Text> */}
-          <View style={{flexDirection: 'row', ...Styles.passwordWrapper}}>
-            <View style={{flex: 1, minHeight: 70}}>
-              <Text>#Password</Text>
-
-              <TextInput
-                style={{...Styles.inputs, flex: 1, marginRight: 1}}
-                secureTextEntry={true}
-                placeholder="password..."
-              />
-            </View>
-            <View style={{flex: 1, minHeight: 70}}>
-              <Text>#Confirm Password</Text>
-
-              <TextInput
-                style={{...Styles.inputs, flex: 1, marginLeft: 1}}
-                secureTextEntry={true}
-                placeholder="password..."
-              />
-            </View>
+      <ScrollView style={Styles.wrapper}>
+        <StatusBar backgroundColor="#0f304d" />
+        <View style={{...Styles.header}}>
+          <View style={{alignSelf: 'flex-start'}}>
+            <H2 style={Styles.whiteText}>Create Your Account</H2>
+            <Text style={Styles.whiteText}>
+              Now you can create an account for free!
+            </Text>
           </View>
+        </View>
 
-          <TouchableOpacity style={Styles.loginButton}>
-            <Text>Signup</Text>
-          </TouchableOpacity>
+        <View style={Styles.form}>
+          <View style={this.state.signedUp ? {} : {display: 'none'}}>
+            <SuccessMessage msg="You have successfully signed up! now you can login using your email and password" />
+          </View>
+          <Input
+            placeholder="John Doe"
+            title="User Name"
+            getText={e => this.setState({Name: e})}
+          />
+          <Input
+            placeholder="example@domain.com"
+            title="Email"
+            getText={e => this.setState({Email: e})}
+          />
+          <Input
+            placeholder="09123456789"
+            title="Phone"
+            getText={e => this.setState({Phone: e})}
+          />
+          <Input
+            placeholder="***"
+            title="Password"
+            password={true}
+            getText={e => this.setState({Password: e})}
+          />
+          <Input
+            placeholder="***"
+            title="Confirm Password"
+            password={true}
+            getText={e => this.setState({ConfirmPassword: e})}
+          />
+          <Submit title="Create Account" handleOnPress={this.handleSignup} />
         </View>
         <View style={Styles.tools}>
           <View style={Styles.buttons}>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Login')}>
-              <Text style={{}}>Login instead</Text>
+              <Text style={{...Styles.whiteText}}>Login Instead!</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 export default CreateAccount;
-
-const Styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: 'whitesmoke',
-    paddingTop: 30,
-    flex: 1,
-  },
-  header: {
-    height: 100,
-  },
-  form: {
-    padding: 15,
-    // backgroundColor: 'green',
-    flex: 1,
-  },
-  inputs: {
-    borderWidth: 1,
-    borderColor: '#9a99a9',
-    padding: 10,
-    paddingTop: 6,
-    paddingBottom: 6,
-    marginBottom: 10,
-  },
-  loginButton: {
-    marginTop: 20,
-    backgroundColor: 'skyblue',
-    padding: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  passwordWrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tools: {
-    // flex: 1,
-    flexDirection: 'row',
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttons: {
-    padding: 20,
-  },
-});
