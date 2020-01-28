@@ -10,9 +10,6 @@ import {H1} from 'native-base';
 import {Icon} from 'native-base';
 
 class Login extends Component {
-  componentDidMount() {
-    this.props.navigation.navigate('Home');
-  }
   handleLogin = () => {
     this.props.navigation.navigate('Home');
   };
@@ -69,7 +66,7 @@ class Login extends Component {
 
 export default Login;
 
-const Styles = StyleSheet.create({
+export const Styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#555',
     flex: 1,
