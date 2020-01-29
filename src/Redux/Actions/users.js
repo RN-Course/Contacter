@@ -4,8 +4,9 @@ export const POST_NEW_USER_ERR = 'POST_NEW_USER_ERR';
 import {postData} from '../../utils/axios';
 
 export function signup(data) {
-  return dispatch => {
-    postData(data, 'user')
+  let post = postData(data, 'users');
+  return function(dispatch) {
+    post
       .then(res => {
         dispatch({type: POST_NEW_USER, payload: res});
       })

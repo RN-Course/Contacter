@@ -10,8 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/checkbox": "^0.2.2",
     "axios": "^0.19.2",
-    "checkbox": "^0.0.1",
     "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.5",

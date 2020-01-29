@@ -6,7 +6,7 @@ export function signup(state = {}, {type, payload}) {
     case POST_NEW_USER: {
       return {
         ...state,
-        msg: 'signup successfully',
+        msg: payload.res,
       };
     }
     case POST_NEW_USER_ERR: {

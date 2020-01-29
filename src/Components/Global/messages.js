@@ -14,3 +14,16 @@ export function SuccessMessage(props) {
     </Fragment>
   );
 }
+
+export function ErrorMessage(props) {
+  return (
+    <Fragment>
+      <View style={{...Styles.successMessage, backgroundColor: 'red'}}>
+        <Text >
+                <Icon name="md-nuclear" size={20} />
+
+        {props.msg}</Text>
+      </View>
+    </Fragment>
+  );
+}

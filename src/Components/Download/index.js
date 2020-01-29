@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, FlatList, CheckBox} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Contacts from 'react-native-contacts';
 import {DownloadStyles as Styles} from '../../assets/Styles';

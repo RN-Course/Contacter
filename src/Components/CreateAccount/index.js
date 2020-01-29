@@ -9,22 +9,47 @@ import {
 import {AuthStyles as Styles} from '../../assets/Styles';
 import {H2} from 'native-base';
 import {Input, Submit} from '../Global/forms';
-import {SuccessMessage} from '../Global/messages';
+import {SuccessMessage, ErrorMessage} from '../Global/messages';
+import {connect} from 'react-redux';
+import {signup} from '../../Redux/Actions/users';
 
 class CreateAccount extends Component {
   state = {
     signedUp: false,
+    error: false
   };
 
-  handleSignup = () => {
-    console.log(this.state);
-    console.log('hello');
+  async verifyPassword({Password, ConfirmPassword, Name, Email, Phone}) {
+    if (Password === ConfirmPassword) {
+      return Object.freeze({
+        Name,
+        Email,
+        Phone,
+        Password,
+        Status: true,
+      });
+    } else {
+      return null;
+    }
+  }
+
+  handleSignup = async () => {
+    let user = await this.verifyPassword(this.state);
+    console.log(user)
+    if (user) {
+      this.signUser(user);
+    } else {
+      this.setState({error: true});
+    }
+  };
+
+  signUser = user => {
+    this.props.signup(user);
     this.setState({signedUp: true});
     setTimeout(() => {
       this.props.navigation.navigate('Login');
     }, 4000);
   };
-
   render() {
     return (
       <ScrollView style={Styles.wrapper}>
@@ -41,6 +66,9 @@ class CreateAccount extends Component {
         <View style={Styles.form}>
           <View style={this.state.signedUp ? {} : {display: 'none'}}>
             <SuccessMessage msg="You have successfully signed up! now you can login using your email and password" />
+          </View>
+          <View style={this.state.error ? {} : {display: 'none'}}>
+            <ErrorMessage msg="There is an error, check your data and try again" />
           </View>
           <Input
             placeholder="John Doe"
@@ -84,4 +112,12 @@ class CreateAccount extends Component {
   }
 }
 
-export default CreateAccount;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapActionsToProps = {
+  signup,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(CreateAccount);
