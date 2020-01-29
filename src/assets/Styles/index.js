@@ -3,7 +3,6 @@ export const AuthStyles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#0f3350',
     flex: 1,
-    // alignItems: 'center'
   },
   header: {
     alignItems: 'center',
@@ -67,7 +66,6 @@ export const AuthStyles = StyleSheet.create({
   },
 });
 
-
 export const DownloadStyles = StyleSheet.create({
   wrapper: {
     flex: 1,
@@ -77,13 +75,13 @@ export const DownloadStyles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 3,
     padding: 15,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 0.5,
+    borderBottomColor: '#888',
+    borderBottomWidth: 0.2,
   },
   thumbnails: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: 'gray',
     margin: 0,
     marginRight: 7,
@@ -111,5 +109,132 @@ export const DownloadStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+});
+
+export const ShareStyles = StyleSheet.create({
+  contanier: {
+    flex: 1,
+  },
+  shareButton: {
+    position: 'absolute',
+    bottom: 50,
+    right: 30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    elevation: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeButtonWrapper: {
+    backgroundColor: 'white',
+    padding: 22,
+    borderRadius: 5,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  closeButton: {
+    width: 30,
+    right: 0,
+    alignItems: 'center',
+    position: 'absolute',
+  },
+  shareInput: {
+    padding: 8,
+    height: 40,
+    backgroundColor: '#f0efef',
+    marginTop: 5,
+    borderRadius: 100,
+    elevation: 1,
+  },
+  shareContactsWrapper: {
+    flexDirection: 'row',
+    marginTop: 8,
+  },
+  shareContacts: {
+    padding: 5,
+    color: 'gray',
+    alignSelf: 'center',
+  },
+});
+
+export const HomeStyles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+  oneContact: {
+    minHeight: 60,
+    marginLeft: 3,
+    marginRight: 3,
+    padding: 15,
+  },
+  thumbnails: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'gray',
+    margin: 4,
+    marginRight: 7,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  image: {
+    width: 60,
+    height: 60,
+    resizeMode: 'stretch',
+  },
+  info: {
+    width: '80%',
+    justifyContent: 'center',
+  },
+  syncButton: {
+    position: 'absolute',
+    bottom: 50,
+    right: 30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    elevation: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export const ContactProfileStyles = StyleSheet.create({
+  icon: {
+    margin: 5,
+    marginLeft: 15,
+    position: 'absolute',
+    right: 10,
+  },
+  listOne: {
+    flexDirection: 'row',
+    // backgroundColor: 'greenyellow',
+    padding: 5,
+    alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  profile: {
+    backgroundColor: '#156485',
+    height: 270,
+  },
+  profileTools: {
+    padding: 10,
+  },
+  profilePicture: {
+    overflow: 'hidden',
+    backgroundColor: 'skyblue',
+    width: 170,
+    height: 170,
+    borderRadius: 170 / 2,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  contactDetails: {
+    // backgroundColor: 'gray',
+    padding: 5,
   },
 });

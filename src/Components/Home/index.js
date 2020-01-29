@@ -1,44 +1,52 @@
 import React, {Component} from 'react';
 import {
   View,
-  StyleSheet,
-  PermissionsAndroid,
   Text,
   TouchableOpacity,
   FlatList,
+  TextInput,
+  StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Contacts from 'react-native-contacts';
+import {HomeStyles as Styles} from '../../assets/Styles';
+import {allContacts} from '../../Strategies';
 
 class Home extends Component {
   state = {
     contacts: [],
   };
+
   componentDidMount() {
-    this._LoadPermissions();
     this._ReadContacts();
   }
 
-  _ReadContacts = () => {
-    Contacts.getAll((err, contacts) => {
-      if (err) console.error(err);
+  _ReadContacts = async () => {
+    let contacts = await allContacts;
+    if (contacts) {
       this.setState({contacts});
-    });
+    }
   };
-
-  _LoadPermissions() {
-    PermissionsAndroid.request('android.permission.READ_CONTACTS')
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
 
   render() {
     return (
       <View style={Styles.wrapper}>
+        <StatusBar backgroundColor="gray" />
+        <View
+          style={{
+            paddingLeft: 10,
+            paddingRight: 10,
+            backgroundColor: 'transparent',
+          }}>
+          <TextInput
+            style={{
+              backgroundColor: '#eee',
+              padding: 3,
+              borderRadius: 5,
+              paddingLeft: 10,
+            }}
+            placeholder="type to search..."
+          />
+        </View>
         <FlatList
           keyExtractor={item => item.recordID}
           data={this.state.contacts}
@@ -52,7 +60,7 @@ class Home extends Component {
   }
 
   static navigationOptions = () => ({
-    tabBarIcon: <Icon name="md-home" size={30} />,
+    tabBarIcon: <Icon name="ios-home" size={25} color="gray" />,
   });
 }
 
@@ -75,45 +83,4 @@ function ListContacts(props) {
   }
 }
 
-
-
 export default Home;
-
-const Styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  oneContact: {
-    // flexDirection: 'row',
-    minHeight: 60,
-    marginLeft: 3,
-    marginRight: 3,
-    padding: 15,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 0.5,
-  },
-  thumbnails: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: 'gray',
-    margin: 4,
-    marginRight: 7,
-  },
-  info: {
-    width: '80%',
-    justifyContent: 'center',
-  },
-  syncButton: {
-    position: 'absolute',
-    bottom: 50,
-    right: 30,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    elevation: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

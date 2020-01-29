@@ -44,7 +44,7 @@ class Download extends Component {
   }
 
   static navigationOptions = () => ({
-    tabBarIcon: <Icon name="md-download" size={30} />,
+    tabBarIcon: <Icon name="ios-share" size={25} color="gray" />,
   });
 }
 

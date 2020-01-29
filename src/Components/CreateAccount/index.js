@@ -1,3 +1,4 @@
+// 'use strict';
 import React, {Component} from 'react';
 import {
   TouchableOpacity,
@@ -12,12 +13,23 @@ import {Input, Submit} from '../Global/forms';
 import {SuccessMessage, ErrorMessage} from '../Global/messages';
 import {connect} from 'react-redux';
 import {signup} from '../../Redux/Actions/users';
-
+import Axios from 'axios';
 class CreateAccount extends Component {
   state = {
     signedUp: false,
-    error: false
+    error: false,
   };
+
+  // componentDidMount() {
+  //   Axios.post('http://192.168.8.101:5000/api/users', {
+  //     Name: 'Axios',
+  //     Email: 'axios@gmail.com',
+  //     Phone: 962722667,
+  //     Password: 'slowloris',
+  //   })
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
+  // }
 
   async verifyPassword({Password, ConfirmPassword, Name, Email, Phone}) {
     if (Password === ConfirmPassword) {
@@ -35,7 +47,7 @@ class CreateAccount extends Component {
 
   handleSignup = async () => {
     let user = await this.verifyPassword(this.state);
-    console.log(user)
+    console.log(user);
     if (user) {
       this.signUser(user);
     } else {

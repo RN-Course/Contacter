@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import {
-  Text, View, TouchableOpacity, TextInput, FlatList, StyleSheet
-} from "react-native";
-import Modal from "react-native-modal";
+import React, {Component} from 'react';
+import {Text, View, TouchableOpacity, TextInput, FlatList} from 'react-native';
+import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {ShareStyles as Styles} from '../../assets/Styles';
 class Share extends Component {
   state = {
     isModalVisible: false,
-    text: ''
+    text: '',
   };
 
   toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+    this.setState({isModalVisible: !this.state.isModalVisible});
   };
-
 
   render() {
     return (
@@ -28,91 +26,43 @@ class Share extends Component {
         <View>
           <Modal
             isVisible={this.state.isModalVisible}
-            backdropOpacity={0.8}
-            animationIn="zoomInDown"
-            animationOut="zoomOutUp"
+            backdropOpacity={0.6}
+            animationIn="bounceInUp"
+            animationOut="bounceOutDown"
             animationInTiming={600}
             animationOutTiming={600}
-            backdropTransitionInTiming={600}
-            backdropTransitionOutTiming={600}
-          >
+            backdropTransitionInTiming={300}
+            backdropTransitionOutTiming={300}>
             <View style={Styles.closeButtonWrapper}>
               <TouchableOpacity
                 onPress={this.toggleModal}
-                style={Styles.closeButton}
-              >
+                style={Styles.closeButton}>
                 <Icon color="red" name="ios-close" size={30} />
               </TouchableOpacity>
               <View>
                 <TextInput
                   style={Styles.shareInput}
                   placeholder="Type your Contact!"
-                  onChangeText={(text) => this.setState({ text })}
+                  onChangeText={text => this.setState({text})}
                   value={this.state.text}
                 />
                 {/* Here we will map users after we found them in search in flatlist OR scrollview ??? Sorry I don't found a time to complete */}
                 <View style={Styles.shareContactsWrapper}>
-                  {this.state.text ? <Icon color="gray" name="md-happy" size={50} /> : null}
-                  <Text style={Styles.shareContacts}>
-                    {this.state.text}
-                  </Text>
+                  {this.state.text ? (
+                    <Icon color="gray" name="md-happy" size={50} />
+                  ) : null}
+                  <Text style={Styles.shareContacts}>{this.state.text}</Text>
                 </View>
               </View>
             </View>
           </Modal>
         </View>
-      </View >
+      </View>
     );
   }
   static navigationOptions = () => ({
-    tabBarIcon: <Icon name="md-share" size={30} />,
+    tabBarIcon: <Icon name="md-share" color="gray" size={25} />,
   });
 }
 
 export default Share;
-
-const Styles = StyleSheet.create({
-  contanier: {
-    flex: 1,
-  },
-  shareButton: {
-    position: 'absolute',
-    bottom: 50,
-    right: 30,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    elevation: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  closeButtonWrapper: {
-    backgroundColor: 'white',
-    padding: 22,
-    borderRadius: 5,
-    borderColor: 'rgba(0, 0, 0, 0.1)'
-  },
-  closeButton: {
-    width: 30,
-    right: 0,
-    alignItems: 'center',
-    position: 'absolute'
-  },
-  shareInput: {
-    padding: 8,
-    height: 40,
-    backgroundColor: '#f0efef',
-    marginTop: 5,
-    borderRadius: 100,
-    elevation: 1
-  },
-  shareContactsWrapper: {
-    flexDirection: 'row',
-    marginTop: 8
-  },
-  shareContacts: {
-    padding: 5,
-    color: 'gray',
-    alignSelf: 'center'
-  }
-});

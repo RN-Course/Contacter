@@ -9,10 +9,19 @@ import {
 } from 'react-native';
 import {AuthStyles as Styles} from '../../assets/Styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {readContactPermission, writeContactPermission} from '../../Permissions';
 class Login extends Component {
   handleLogin = () => {
     this.props.navigation.navigate('Home');
   };
+
+  componentDidMount() {
+    readContactPermission()
+      .catch(err => alert(err))
+      .then(() => {
+        writeContactPermission().catch(err => alert(err));
+      });
+  }
 
   render() {
     return (
