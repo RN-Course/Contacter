@@ -52,18 +52,23 @@ function ListContacts(props) {
   if (props) {
     const [number] = props.contact.item.phoneNumbers;
     return (
-      <View style={Styles.oneContact}>
-        <TouchableOpacity style={{flexDirection: 'row'}}>
-          <View style={Styles.thumbnails}></View>
-          <View style={Styles.info}>
-            <Text>{props.contact.item.displayName}</Text>
-            <Text>{number ? number.number : 'no number found'}</Text>
-          </View>
-          <View style={Styles.buttons}>
-            <CheckBox />
-            <Icon style={Styles.icons} name="md-download" size={30} />
-          </View>
-        </TouchableOpacity>
+      <View>
+        <View style={Styles.oneContact}>
+          <TouchableOpacity style={{flexDirection: 'row'}}>
+            <View style={Styles.thumbnails}></View>
+            <View style={Styles.info}>
+              <Text>{props.contact.item.displayName}</Text>
+              <Text>{number ? number.number : 'no number found'}</Text>
+            </View>
+            
+          </TouchableOpacity>
+        </View>
+        <View style={{...Styles.oneContactFloating, position:'absolute'}}>
+        <View style={Styles.buttons}>
+              <CheckBox />
+              <Icon style={Styles.icons} name="md-download" size={30} />
+            </View>
+        </View>
       </View>
     );
   } else {

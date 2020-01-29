@@ -79,6 +79,14 @@ export const DownloadStyles = StyleSheet.create({
     padding: 15,
     borderBottomColor: 'gray',
     borderBottomWidth: 0.5,
+    backgroundColor: 'white',
+  },
+  oneContactFloating: {
+    position: 'absolute',
+    minHeight: 60,
+    marginRight: 3,
+    padding: 15,
+    //zIndex: -100,
   },
   thumbnails: {
     width: 60,
