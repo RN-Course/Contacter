@@ -4,7 +4,7 @@ export const POST_NEW_USER_ERR = 'POST_NEW_USER_ERR';
 import {postData} from '../../utils/axios';
 
 export function signup(data) {
-  let post = postData(data, 'users');
+  let post = postData(data, 'api/users');
   return function(dispatch) {
     post
       .then(res => {

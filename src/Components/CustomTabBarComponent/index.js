@@ -18,22 +18,24 @@ class CustomTabBar extends Component {
     return (
       <View style={Styles.wrapper}>
         <View style={Styles.header}>
-          <Left style={{flexDirection: 'row'}}>
+          <Left style={{flexDirection: 'row', alignItems: 'center'}}>
             <Icon
               onPress={this.switchDrawer}
               name="md-menu"
               size={30}
               style={{marginRight: 15}}
             />
-            <H2>Contacter</H2>
+            <H3>Contacter</H3>
           </Left>
           <Right
             style={{
               flexDirection: 'row',
               maxWidth: 70,
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
-            <Icon name="md-sync" size={30} style={{marginRight: 25}} />
-            <Icon name="ios-search" size={30} />
+            <Icon name="md-sync" size={25} style={{marginRight: 25}} />
+            <Icon name="ios-search" size={25} />
             {/* <TextInput
               placeholder="Search..."
               style={{flex: 1, width: '100%', bo}}
