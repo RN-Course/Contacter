@@ -13,21 +13,21 @@ class Download extends Component {
     contacts: [],
   };
 
-  componentDidMount = () => {
+  /*componentDidMount = () => {
     this._DownloadUsers();
   };
 
-/*  _ReadContacts = () => {
+  _ReadContacts = () => {
     Contacts.getAll((err, contacts) => {
       if (err) console.error(err);
       this.setState({contacts});
     });
   };
-  */
+  
 
   _DownloadUsers = () => {
     connect(mapStateToProps, mapActionsToProps)(Download);
-  }
+  }*/
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps) {
@@ -108,4 +108,4 @@ const mapActionsToProps = {
 
 
 
-export default Download;
+export default connect(mapStateToProps, mapActionsToProps)(Download);
