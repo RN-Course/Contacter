@@ -1,7 +1,12 @@
-import {POST_NEW_USER, POST_NEW_USER_ERR} from '../Actions/users';
+import {
+  POST_NEW_USER,
+  POST_NEW_USER_ERR,
+  LOGIN_USER,
+  LOGIN_USER_ERR,
+} from '../Actions/users';
 
 // signup reducer
-export function signup(state = {}, {type, payload}) {
+export function auth(state = {}, {type, payload}) {
   switch (type) {
     case POST_NEW_USER: {
       return {
@@ -10,6 +15,18 @@ export function signup(state = {}, {type, payload}) {
       };
     }
     case POST_NEW_USER_ERR: {
+      return {
+        ...state,
+        msg: payload.err,
+      };
+    }
+    case LOGIN_USER: {
+      return {
+        ...state,
+        loginData: payload.res,
+      };
+    }
+    case LOGIN_USER_ERR: {
       return {
         ...state,
         msg: payload.err,

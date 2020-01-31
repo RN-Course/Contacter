@@ -13,23 +13,11 @@ import {Input, Submit} from '../Global/forms';
 import {SuccessMessage, ErrorMessage} from '../Global/messages';
 import {connect} from 'react-redux';
 import {signup} from '../../Redux/Actions/users';
-import Axios from 'axios';
 class CreateAccount extends Component {
   state = {
     signedUp: false,
     error: false,
   };
-
-  // componentDidMount() {
-  //   Axios.post('http://192.168.8.101:5000/api/users', {
-  //     Name: 'Axios',
-  //     Email: 'axios@gmail.com',
-  //     Phone: 962722667,
-  //     Password: 'slowloris',
-  //   })
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-  // }
 
   async verifyPassword({Password, ConfirmPassword, Name, Email, Phone}) {
     if (Password === ConfirmPassword) {
@@ -47,20 +35,28 @@ class CreateAccount extends Component {
 
   handleSignup = async () => {
     let user = await this.verifyPassword(this.state);
-    console.log(user);
     if (user) {
-      this.signUser(user);
+      this.props.signup(user);
     } else {
       this.setState({error: true});
     }
   };
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      if ((nextProps.signupMsg.status = 200)) {
+        this.setState({signedUp: true});
+        setTimeout(() => {
+          this.props.navigation.navigate('Login');
+        }, 4000);
+      } else {
+        this.setState({error: true});
+      }
+    }
+  }
+
   signUser = user => {
     this.props.signup(user);
-    this.setState({signedUp: true});
-    setTimeout(() => {
-      this.props.navigation.navigate('Login');
-    }, 4000);
   };
   render() {
     return (
@@ -125,7 +121,9 @@ class CreateAccount extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    signupMsg: state.auth.msg,
+  };
 };
 
 const mapActionsToProps = {
