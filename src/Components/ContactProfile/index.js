@@ -45,7 +45,9 @@ class ContactProfile extends Component {
                   source={{uri: this.props.navigation.state.params.Thumbnail}}
                 />
               ) : (
-                <H1 style={{alignSelf: 'center'}}>{this.state.FirstChar}</H1>
+                <H1 style={{alignSelf: 'center', color: 'white'}}>
+                  {this.state.FirstChar}
+                </H1>
               )}
             </View>
             <View style={{alignItems: 'center', padding: 15}}>
@@ -66,7 +68,11 @@ class ContactProfile extends Component {
             </View>
             <View style={Styles.listOne}>
               <View>
-                <Text style={{fontSize: 16}}>{this.state.Email}</Text>
+                <Text style={{fontSize: 16}}>
+                  {this.state.Email
+                    ? this.state.Email
+                    : 'No email address found'}
+                </Text>
                 <Text style={{fontSize: 14, color: 'gray'}}>Email</Text>
               </View>
               <Icon style={Styles.icon} name="ios-mail" size={20} />

@@ -11,7 +11,7 @@ export function auth(state = {}, {type, payload}) {
     case POST_NEW_USER: {
       return {
         ...state,
-        msg: payload.res,
+        msg: payload.data,
       };
     }
     case POST_NEW_USER_ERR: {
@@ -23,7 +23,7 @@ export function auth(state = {}, {type, payload}) {
     case LOGIN_USER: {
       return {
         ...state,
-        loginData: payload.res,
+        loginData: payload.data,
       };
     }
     case LOGIN_USER_ERR: {

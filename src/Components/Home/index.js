@@ -1,60 +1,39 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  TextInput,
-  StatusBar,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {HomeStyles as Styles} from '../../assets/Styles';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {View, FlatList, TouchableOpacity} from 'react-native';
 import {allContacts} from '../../Strategies';
+
+import ContactList from './ContactList';
 
 class Home extends Component {
   state = {
     contacts: [],
+    selectMode: false,
   };
 
-  componentDidMount() {
-    this._ReadContacts();
-  }
-
-  _ReadContacts = async () => {
+  async componentDidMount() {
     let contacts = await allContacts;
     if (contacts) {
       this.setState({contacts});
     }
+  }
+
+  switchToSelectMode = () => {
+    this.setState({selectMode: true});
   };
 
   render() {
     return (
       <View style={Styles.wrapper}>
-        <StatusBar backgroundColor="gray" />
-        <View
-          style={{
-            paddingLeft: 10,
-            paddingRight: 10,
-            backgroundColor: 'transparent',
-          }}>
-          <TextInput
-            style={{
-              backgroundColor: '#eee',
-              padding: 3,
-              borderRadius: 5,
-              paddingLeft: 10,
-            }}
-            placeholder="type to search..."
-          />
-        </View>
         <FlatList
           keyExtractor={item => item.recordID}
           data={this.state.contacts}
-          renderItem={item => <ListContacts contact={item} />}
+          initialNumToRender={7}
+          renderItem={item => (
+            <ContactList navigation={this.props.navigation} contact={item} />
+          )}
         />
-        <TouchableOpacity style={Styles.syncButton}>
-          <Icon color="gray" name="md-sync" size={35} />
-        </TouchableOpacity>
       </View>
     );
   }
@@ -62,25 +41,6 @@ class Home extends Component {
   static navigationOptions = () => ({
     tabBarIcon: <Icon name="ios-home" size={25} color="gray" />,
   });
-}
-
-function ListContacts(props) {
-  if (props) {
-    const [number] = props.contact.item.phoneNumbers;
-    return (
-      <View style={Styles.oneContact}>
-        <TouchableOpacity style={{flexDirection: 'row'}}>
-          <View style={Styles.thumbnails}></View>
-          <View style={Styles.info}>
-            <Text>{props.contact.item.displayName}</Text>
-            <Text>{number ? number.number : 'no number found'}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  } else {
-    return null;
-  }
 }
 
 export default Home;

@@ -6,11 +6,11 @@ export const LOGIN_USER_ERR = 'LOGIN_USER_ERR';
 import {postData} from '../../utils/axios';
 
 export function signup(data) {
-  let post = postData(data, 'api/users');
+  let post = postData(data, 'api/users/signup');
   return function(dispatch) {
     post
       .then(res => {
-        dispatch({type: POST_NEW_USER, payload: res.data});
+        dispatch({type: POST_NEW_USER, payload: res});
       })
       .catch(err => {
         dispatch({type: POST_NEW_USER_ERR, payload: err});
@@ -19,7 +19,7 @@ export function signup(data) {
 }
 
 export async function login({Email, Password}) {
-  let loginRequest = postData({Email, Password}, 'api/login');
+  let loginRequest = postData({Email, Password}, 'api/users/login');
   return function(dispatch) {
     loginRequest
       .then(res => {
