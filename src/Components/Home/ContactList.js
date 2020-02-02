@@ -1,8 +1,10 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {HomeStyles as Styles} from '../../assets/Styles';
-import {View, Text, TouchableOpacity, Image, Animated} from 'react-native';
+import {View, Text, Image, Animated} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-export default class ListContacts extends Component {
+
+export default class ListContacts extends PureComponent {
   state = {
     marked: false,
   };
@@ -35,10 +37,11 @@ export default class ListContacts extends Component {
   };
 
   render() {
+    // alert(AsyncStorage.getItem('token'));
     if (this.props.contact) {
       const [number] = this.props.contact.item.phoneNumbers;
       return (
-        <Swipeable renderLeftActions={SwipeLeft}>
+        <Swipeable renderRightActions={SwipeRight}>
           <View
             style={[
               {
@@ -77,10 +80,21 @@ export default class ListContacts extends Component {
   }
 }
 
-function SwipeLeft() {
+function SwipeRight() {
   return (
-    <View>
-      <Text>Left</Text>
+    <View
+      style={{
+        backgroundColor: 'red',
+        padding: 30,
+        justifyContent: 'center',
+        flex: 1,
+      }}>
+      <Icon
+        name="md-trash"
+        style={{alignSelf: 'flex-end'}}
+        size={30}
+        color="white"
+      />
     </View>
   );
 }

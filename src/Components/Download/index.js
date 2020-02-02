@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Contacts from 'react-native-contacts';
 import {DownloadStyles as Styles} from '../../assets/Styles';
 
 import {connect} from 'react-redux';
@@ -12,22 +11,6 @@ class Download extends Component {
   state = {
     contacts: [],
   };
-
-  /*componentDidMount = () => {
-    this._DownloadUsers();
-  };
-
-  _ReadContacts = () => {
-    Contacts.getAll((err, contacts) => {
-      if (err) console.error(err);
-      this.setState({contacts});
-    });
-  };
-  
-
-  _DownloadUsers = () => {
-    connect(mapStateToProps, mapActionsToProps)(Download);
-  }*/
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps) {
@@ -39,7 +22,6 @@ class Download extends Component {
       }
     }
   }
-
 
   render() {
     return (
@@ -57,7 +39,7 @@ class Download extends Component {
           renderItem={item => <ListContacts contact={item} />}
         />
         <TouchableOpacity style={Styles.downloadButton}>
-          <Icon color="gray" name="md-download" size={35} />
+          <Icon color="gray" name="ios-sync" size={35} />
         </TouchableOpacity>
       </View>
     );
@@ -80,14 +62,13 @@ function ListContacts(props) {
               <Text>{props.contact.item.displayName}</Text>
               <Text>{number ? number.number : 'no number found'}</Text>
             </View>
-            
           </TouchableOpacity>
         </View>
-        <View style={{...Styles.oneContactFloating, position:'absolute'}}>
-        <View style={Styles.buttons}>
-              <CheckBox />
-              <Icon style={Styles.icons} name="md-download" size={30} />
-            </View>
+        <View style={{...Styles.oneContactFloating, position: 'absolute'}}>
+          <View style={Styles.buttons}>
+            <CheckBox />
+            <Icon style={Styles.icons} name="md-download" size={30} />
+          </View>
         </View>
       </View>
     );
@@ -105,7 +86,5 @@ const mapStateToProps = state => {
 const mapActionsToProps = {
   downloadUsers,
 };
-
-
 
 export default connect(mapStateToProps, mapActionsToProps)(Download);

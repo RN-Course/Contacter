@@ -18,7 +18,7 @@ export function signup(data) {
   };
 }
 
-export async function login(data) {
+export function login(data) {
   let loginRequest = postData(data, 'api/users/login');
   return function(dispatch) {
     loginRequest

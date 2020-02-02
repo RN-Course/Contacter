@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {HomeStyles as Styles} from '../../assets/Styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {View, FlatList, TouchableOpacity} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {allContacts} from '../../Strategies';
 
 import ContactList from './ContactList';
 
-class Home extends Component {
+class Home extends PureComponent {
   state = {
     contacts: [],
     selectMode: false,
