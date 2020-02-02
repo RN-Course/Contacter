@@ -5,13 +5,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Contacts from 'react-native-contacts';
 import {DownloadStyles as Styles} from '../../assets/Styles';
 
+import {connect} from 'react-redux';
+import {downloadUsers} from '../../Redux/Actions/download';
+
 class Download extends Component {
   state = {
     contacts: [],
   };
 
-  componentDidMount = () => {
-    this._ReadContacts();
+  /*componentDidMount = () => {
+    this._DownloadUsers();
   };
 
   _ReadContacts = () => {
@@ -20,6 +23,23 @@ class Download extends Component {
       this.setState({contacts});
     });
   };
+  
+
+  _DownloadUsers = () => {
+    connect(mapStateToProps, mapActionsToProps)(Download);
+  }*/
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      if ((nextProps.downloadMsg.status = 200)) {
+        this.setState({contacts});
+      } else {
+        this.setState({error: true});
+        this.setState(null);
+      }
+    }
+  }
+
 
   render() {
     return (
@@ -76,4 +96,16 @@ function ListContacts(props) {
   }
 }
 
-export default Download;
+const mapStateToProps = state => {
+  return {
+    downloadMsg: state.downloadUsers.msg,
+  };
+};
+
+const mapActionsToProps = {
+  downloadUsers,
+};
+
+
+
+export default connect(mapStateToProps, mapActionsToProps)(Download);
