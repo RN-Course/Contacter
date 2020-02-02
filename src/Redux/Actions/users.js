@@ -18,12 +18,12 @@ export function signup(data) {
   };
 }
 
-export async function login({Email, Password}) {
-  let loginRequest = postData({Email, Password}, 'api/users/login');
+export async function login(data) {
+  let loginRequest = postData(data, 'api/users/login');
   return function(dispatch) {
     loginRequest
       .then(res => {
-        dispatch({type: LOGIN_USER, payload: res.data});
+        dispatch({type: LOGIN_USER, payload: res});
       })
       .catch(err => {
         dispatch({type: LOGIN_USER_ERR, payload: err});

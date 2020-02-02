@@ -10,6 +10,8 @@ import {
 import {AuthStyles as Styles} from '../../assets/Styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {readContactPermission, writeContactPermission} from '../../Permissions';
+import {login} from '../../Redux/Actions/users';
+import {connect} from 'react-redux';
 class Login extends Component {
   handleLogin = () => {
     this.props.navigation.navigate('Home');
@@ -22,6 +24,14 @@ class Login extends Component {
         writeContactPermission().catch(err => alert(err));
       });
   }
+
+  handleLogin = () => {
+    const {Email, Password} = this.state;
+    if (!Email || !Password) {
+      alert('fields are required!!');
+    }
+    this.props.login(this.state);
+  };
 
   render() {
     return (
@@ -38,6 +48,7 @@ class Login extends Component {
             <Text style={{...Styles.whiteText}}>User Name</Text>
             <TextInput
               style={Styles.inputs}
+              onChangeText={e => this.setState({Email: e})}
               placeholderTextColor="white"
               placeholder="example@domain.com"
             />
@@ -47,13 +58,14 @@ class Login extends Component {
             <TextInput
               style={Styles.inputs}
               secureTextEntry={true}
+              onChangeText={e => this.setState({Password: e})}
               placeholder="*********"
               placeholderTextColor="white"
             />
           </View>
           <TouchableOpacity
             style={{...Styles.loginButton}}
-            onPress={() => this.props.navigation.navigate('Home')}>
+            onPress={this.handleLogin}>
             <View style={{flex: 1}}>
               <Text style={{fontSize: 20}}>Login</Text>
             </View>
@@ -84,4 +96,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapActionsToProps = {
+  login,
+};
+
+export default connect(null, mapActionsToProps)(Login);
